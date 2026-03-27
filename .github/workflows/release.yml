@@ -56,3 +56,4 @@ jobs:
           username: ${{ github.actor }}
           access-token: ${{ secrets.GITHUB_TOKEN }}
           force: true
+          chart-folder: charts
