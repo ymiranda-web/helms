@@ -43,9 +43,16 @@ jobs:
           CR_SKIP_EXISTING: true
           CR_RELEASE_NAME_TEMPLATE: "{{ .Name }}-{{ .Version }}"
 
-      - name: Push charts to GHCR
+      - name: Get charts packages
+        id: get_charts
         run: |
-          shopt -s nullglob
-          for pkg in .cr-release-packages/*.tgz; do
-            helm push "$pkg" oci://ghcr.io/${{ github.repository_owner }}/charts
-          done
+          echo "pkgs=$(ls .cr-release-packages/*.tgz | xargs | tr ' ' ',')" >> "$GITHUB_OUTPUT"
+
+      - name: Push charts to GHCR
+        uses: bsord/helm-push@v4.1.0
+        with:
+          useOCIRegistry: true
+          registry-url: oci://ghcr.io/${{ github.repository_owner }}/charts
+          username: ${{ github.actor }}
+          access-token: ${{ secrets.GITHUB_TOKEN }}
+          force: true
