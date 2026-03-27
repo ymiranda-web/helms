@@ -48,7 +48,7 @@ jobs:
         run: |
           echo "pkgs=$(ls .cr-release-packages/*.tgz | xargs | tr ' ' ',')" >> "$GITHUB_OUTPUT"
 
-      - name: Push charts to GHCR
+      - name: Push charts Gateway API to GHCR
         uses: bsord/helm-push@v4.1.0
         with:
           useOCIRegistry: true
@@ -56,4 +56,4 @@ jobs:
           username: ${{ github.actor }}
           access-token: ${{ secrets.GITHUB_TOKEN }}
           force: true
-          chart-folder: charts
+          chart-folder: charts/gateway-api
