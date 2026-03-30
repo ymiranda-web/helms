@@ -1,0 +1,15 @@
+# Install the Solr API CRDs before installing the helm chart.
+# This is idempotent and will never remove existing CRDs.
+solrCRDInstaller:
+  # Disable the installation of the Solr API CRDs.
+  enabled: true
+  # Configure the image used to install the Solr API CRDs.
+  image:
+    repository: "alpine/kubectl"
+    tag: "1.33.3"
+  # Version of the Solr API CRDs to install.
+  # Docs: https://gateway-api.sigs.k8s.io/installation/
+  version: "0.9.1"
+  # Whether to install experimental CRDs. May be either "all-with-dependencies" or "all" or "solrclouds".
+  #
+  channel: "all-with-dependencies"
