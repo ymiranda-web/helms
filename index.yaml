@@ -1,0 +1,15 @@
+apiVersion: v1
+entries:
+  solr-operator:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2026-03-30T17:46:42.313889635Z"
+    description: Deploy the Solr CRDs.
+    digest: f3d594db47177facd65f7267ba5ac492ee6bdf240895a6eef2fa1fe1ea03a01b
+    icon: https://www.kubeblog.com/wp-content/uploads/2024/09/gateway-api-logo-1.png
+    name: solr-operator
+    type: application
+    urls:
+    - https://github.com/ymiranda-web/helms/releases/download/solr-operator-0.1.0/solr-operator-0.1.0.tgz
+    version: 0.1.0
+generated: "2026-03-30T17:46:42.313899894Z"
