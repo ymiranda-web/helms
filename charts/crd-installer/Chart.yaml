@@ -1,0 +1,7 @@
+apiVersion: v2
+appVersion: 0.1.0
+description: A generic Helm chart for installing CRDs from URLs.
+icon: https://raw.githubusercontent.com/cncf/artwork/main/projects/kubernetes/icon/color/kubernetes-icon-color.svg
+name: crd-installer
+type: application
+version: 0.1.0

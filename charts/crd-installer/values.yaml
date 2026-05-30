@@ -1,0 +1,19 @@
+# Install CRDs from URLs before deploying the chart.
+# This is idempotent and will never remove existing CRDs.
+crdInstaller:
+  enabled: true
+
+  # Image used to install the CRDs.
+  image:
+    repository: alpine/kubectl
+    tag: "1.33.3"
+
+  # Base name for the Kubernetes resources created (ServiceAccount,
+  # ClusterRole, ClusterRoleBinding, Job).
+  name: crd-installer
+
+  # List of URLs pointing to CRD YAML manifests to install.
+  # Each URL is fetched with `kubectl apply -f <url>`.
+  urls:
+    - https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.3.0/config/crd/standard/gateway.networking.k8s.io_gatewayclasses.yaml
+    - https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.3.0/config/crd/standard/gateway.networking.k8s.io_gateways.yaml

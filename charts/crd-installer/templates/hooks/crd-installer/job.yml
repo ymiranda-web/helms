@@ -1,0 +1,49 @@
+{{- if (.Values.crdInstaller.enabled) }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-{{ .Values.crdInstaller.name }}
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-weight": "-1"
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded,hook-failed
+spec:
+  ttlSecondsAfterFinished: 300
+  template:
+    metadata:
+      name: {{ .Release.Name }}-{{ .Values.crdInstaller.name }}
+    spec:
+      serviceAccountName: {{ .Release.Name }}-{{ .Values.crdInstaller.name }}
+      containers:
+      - name: {{ .Values.crdInstaller.name }}
+        image: "{{ .Values.crdInstaller.image.repository }}:{{ .Values.crdInstaller.image.tag }}"
+        command:
+        - /bin/sh
+        - -c
+        - |
+          echo "Installing CRDs from {{ .Values.crdInstaller.urls | len }} URL(s)..."
+          {{- range $url := .Values.crdInstaller.urls }}
+          kubectl apply -f {{ $url }}
+          {{- end }}
+          echo "Successfully installed all CRDs."
+      restartPolicy: OnFailure
+      tolerations:
+        - operator: Exists
+        - effect: NoSchedule
+          operator: Exists
+        - effect: NoExecute
+          operator: Exists
+        - effect: PreferNoSchedule
+          operator: Exists
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/control-plane
+          operator: Exists
+        - effect: NoExecute
+          key: node-role.kubernetes.io/control-plane
+          operator: Exists
+        - effect: PreferNoSchedule
+          key: node-role.kubernetes.io/control-plane
+          operator: Exists
+      hostNetwork: true
+{{- end }}
