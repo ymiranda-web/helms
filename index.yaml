@@ -1,5 +1,17 @@
 apiVersion: v1
 entries:
+  crd-installer:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2026-05-30T03:38:29.856231042Z"
+    description: A generic Helm chart for installing CRDs from URLs.
+    digest: b0ac65997f08d9ac13ae5f46bce8a1473d9af03c4e88211dc3e9481099925970
+    icon: https://raw.githubusercontent.com/cncf/artwork/main/projects/kubernetes/icon/color/kubernetes-icon-color.svg
+    name: crd-installer
+    type: application
+    urls:
+    - https://github.com/ymiranda-web/helms/releases/download/crd-installer-0.1.0/crd-installer-0.1.0.tgz
+    version: 0.1.0
   solr-operator:
   - apiVersion: v2
     appVersion: 0.1.0
@@ -12,4 +24,4 @@ entries:
     urls:
     - https://github.com/ymiranda-web/helms/releases/download/solr-operator-0.1.0/solr-operator-0.1.0.tgz
     version: 0.1.0
-generated: "2026-03-30T17:46:42.313899894Z"
+generated: "2026-05-30T03:38:29.856240116Z"
